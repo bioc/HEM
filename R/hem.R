@@ -3,19 +3,20 @@
 #
 #        Heterogeneous Error Model (HEM) for Analysis of Microarray Data
 #
-#          developed by HyungJun Cho, PhD, and Jae K. Lee, PhD, 
+#          developed by HyungJun Cho, PhD, and Jae K. Lee, PhD,
+#              (hcho@virginia.edu; jaeklee@virginia.edu)           
 #              Division of Biostatistics and Epidemiology
 #              University of Virginia School of Medicine
 #
-#                   Version 1.0.2 (2004-05-25)   
+#                   Version 1.0.3 (2004-09-13)   
 #
 ##########################################################################
 
 .First.lib <- function(lib, pkg) { 
-   cat("HEM version 1.0.2 (2004-05-25)\n") 
+   cat("HEM version 1.0.3 (2004-09-13)\n") 
    library.dynam("HEM", pkg, lib)
    invisible()
-   if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") { addPDF2Vig("HEM") }
+   if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") { addVigs2WinMenu("HEM") }
 }
 
 

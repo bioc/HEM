@@ -58,6 +58,11 @@ hem(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
 \item{H}{H-scores} 
 }
 
+\references{
+Cho, H. and Lee, J.K. (2004) Bayesian Hierarchical Error Model for Analysis of Gene Expression Data, 
+Bioinformatics, 20: 2016-2025.
+}
+
 \author{
  HyungJun Cho, PhD, and Jae K. Lee, PhD,
 \cr
@@ -89,7 +94,7 @@ rep  <- c(1,2,1,2,1,2,1,2,1,2,1,2) #experimental replicate
 design <- data.frame(cond,ind,rep)
 
 ##normalization
-pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)
+pbrain.nor <- hem.preproc(pbrain[,2:13])
 
 ##fit HEM with two layers of error
 ##using the small numbers of burn-ins and MCMC samples for a testing purpose;
@@ -111,7 +116,7 @@ ind  <- c(1:6,rep((1:5),4))
 design <- data.frame(cond,ind)
 
 ##construct a design matrix
-mubcp.nor <- hem.preproc(mubcp, cond=cond)
+mubcp.nor <- hem.preproc(mubcp)
 
 #fit HEM with one layers of error
 #using the small numbers of burn-ins and MCMC samples for a testing purpose;

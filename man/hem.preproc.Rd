@@ -31,8 +31,7 @@ HyungJun Cho and Jae K. Lee
 library(HEM)
 
 data(pbrain)
-cond <- c(1,1,1,1,1,1,2,2,2,2,2,2)
-pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)
+pbrain.nor <- hem.preproc(pbrain[,2:13])
 
 }
 

@@ -1,5 +1,4 @@
 \name{immune}
-\docType(data}
 \alias{immune}
 
 \title{Gene Expression Data for a mouse immune response study}

@@ -1,5 +1,4 @@
 \name{mubcp}
-\docType(data}
 \alias{mubcp}
 \title{
 Gene expression data for mouse B cell development

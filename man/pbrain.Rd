@@ -1,5 +1,4 @@
 \name{pbrain}
-\docType(data}
 \alias{pbrain}
 \title{
 Gene expression data for primate brains

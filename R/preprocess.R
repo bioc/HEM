@@ -3,7 +3,7 @@
 ###################################################################
 ###Preprocess: normalization, thesholding, and log2 transformation
 ################################################################### 
-hem.preproc <- function (x, cond, data.type = "MAS5")
+hem.preproc <- function (x, data.type = "MAS5")
 {
 
     #Refine!!!
@@ -30,19 +30,6 @@ hem.preproc <- function (x, cond, data.type = "MAS5")
    
     #log2 transformation
     x <- logb(x, 2)
-
-    #LOWESS normalization with rank invariant genes
-#    x0 <- dat.rank.invar(x, cond=cond)
-#    for(j in 2:ncol(x)){
-#       x[,j] <- lowess.normalize.rank.invar(x[,1], x[,j], x0[,1], x0[,j])$y 
-#    }
-
-    #LOWESS normalization
-#    for(j in 2:ncol(x)){
-#       x[,j] <- lowess.normalize(x[,1], x[,j])$y 
-#    }
-
-
     return(x)
 }
 

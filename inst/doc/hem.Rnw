@@ -172,7 +172,7 @@ Example 2.1: Two-layer HEM
 12    2   3   2
 
 
-> pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)            #preprocessing
+> pbrain.nor <- hem.preproc(pbrain[,2:13])            #preprocessing
 > pbrain.nor[1:5,]
 
 > pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design)    #fit HEM
@@ -364,7 +364,7 @@ Example 5.1: One-layer HEM
 25   5   4
 26   5   5
   
-> mubcp.nor <- hem.preproc(mubcp, cond=cond)                 #preprocessing
+> mubcp.nor <- hem.preproc(mubcp)                 #preprocessing
 
 
 > mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design)       #fit HEM

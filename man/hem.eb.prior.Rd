@@ -57,7 +57,7 @@ rep  <- c(1,2,1,2,1,2,1,2,1,2,1,2)
 design <- data.frame(cond,ind,rep)
 
 ##normalization
-pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)
+pbrain.nor <- hem.preproc(pbrain[,2:13])
 
 ##take a subset for a testing purpose;
 ##use all genes for a practical purpose
@@ -85,7 +85,7 @@ ind  <- c(1:6,rep((1:5),4))
 design <- data.frame(cond,ind)
 
 ##normalization
-mubcp.nor <- hem.preproc(mubcp, cond=cond)
+mubcp.nor <- hem.preproc(mubcp)
 
 ##take a subset for a testing purpose;
 ##use all genes for a practical purpose

@@ -51,7 +51,7 @@ rep  <- c(1,2,1,2,1,2,1,2,1,2,1,2)
 design <- data.frame(cond,ind,rep)
 
 ##normalization
-pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)
+pbrain.nor <- hem.preproc(pbrain[,2:13])
 
 ##take a subset for a testing purpose;
 ##use all genes for a practical purpose

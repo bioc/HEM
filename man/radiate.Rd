@@ -1,5 +1,4 @@
 \name{radiate}
-\docType(data}
 \alias{radiate}
 \title{
 Gene expression data for ionizing radiation data

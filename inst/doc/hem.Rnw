@@ -108,15 +108,15 @@ For discovering differentially expressed genes,  the summary statistic using the
 ($\bar\mu, \bar{g}_i, \bar{c}_j, \bar{r}_{i,j}, \bar{\sigma}^2_{b_{i,j}}, \bar{\sigma}^2_{e_{i,j,k}}$)  is
 
 \[
-F_i = \sum_{j=1}^C  \frac{ w_{i,j} (\bar{\mu}_{i,j}-\bar{\bar{\mu}}_{i})^2}
+H_i = \sum_{j=1}^C  \frac{ w_{i,j} (\bar{\mu}_{i,j}-\bar{\bar{\mu}}_{i})^2}
            {(\bar{\sigma}^2_{b_{i,j}} + \sum_{k=1}^{m_{i,j}} \bar{\sigma}^2_{e_{i,j,k}}/m_{i,j})},
 \]
 where $w_{i,j}=m_{i,j}/\sum_j m_{i,j}$,
 $\bar{\mu}_{i,j} = \bar\mu + \bar{g}_i + \bar{c}_j + \bar{r}_{i,j}$, and
 $\bar{\bar{\mu}}_{i}=\sum_j \bar{\mu}_{i,j}/C$.
-More differentially expressed genes have larger $F$-scores; hence, 
-a desired number of genes with large $F$-scores are selected. 
-The false discovery rate (FDR) can be used to determine a threshold value of $F$, as described in Section 4.  
+More differentially expressed genes have larger $H$-scores; hence, 
+a desired number of genes with large $H$-scores are selected. 
+The false discovery rate (FDR) can be used to determine a threshold value of $H$, as described in Section 4.  
 
 
 Example 2.1 shows how the \Rpackage{HEM} package is used to estimate parameters in the above model. 
@@ -131,7 +131,7 @@ and experimental (technical) replicate.
 
 The \Rfunction{hem.preproc} function is used to do IQR normalization and log2-transformation; 
 however, other normalization methods can be used.
-In the \Rfunction{hem} function, the argument  \Rfunarg{n.layer=2} indicates two-layer EM, and 
+In the \Rfunction{hem} function, the argument  \Rfunarg{n.layer=2} indicates two-layer HEM, and 
 the missing arguments \Rfunarg{method.var.e="gam"} and  \Rfunarg{method.var.b="gam"} (as the default) represent 
 $\mbox{Gamma}(\alpha_e,\beta_e)$ and $\mbox{Gamma}(\alpha_b,\beta_b)$ priors
 for experimental and biological variance parameters. 
@@ -175,12 +175,12 @@ Example 2.1: Two-layer HEM
 > pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)            #preprocessing
 > pbrain.nor[1:5,]
 
-> pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design)    #fit EM
-> pbrain.hem$F                                               #F-scores
+> pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design)    #fit HEM
+> pbrain.hem$H                                               #H-scores
 
 
 \end{verbatim}
-$F$-scores are saved into \Robject{pbrain.hem\$F} in the order of original data, 
+$H$-scores are saved into \Robject{pbrain.hem\$H} in the order of original data, 
 and estimates of $x_{i,j,k}, \mu_{i,j}, \sigma^2_{e_{i,j,k}}$ and $\sigma^2_{b_{i,j}}$ are contained 
 in {\bf m.x, m.mu, m.var.e}, and {\bf n.var.b} under \Robject{pbrain.hem}.
 
@@ -257,22 +257,22 @@ To obtain null data assimilating practical microarray data, we resample raw data
 {\it i.e.},  all of $y_{i,j,1,1},$ $\ldots,$ $y_{i,j,m_{i,j},n_{i,j,k}}$ for gene $i$ and condition $j$ are sampled together 
 for a generated gene under a condition.
 
-Suppose $F$-statistics are computed from raw data, 
-and $F^0$-statistics from generated null data. 
+Suppose $H$-statistics are computed from raw data, 
+and $H^0$-statistics from generated null data. 
 Generation of null data is repeated $B$ times independently.
 Given a critical value $\Delta$, the estimate of FDR is defined as 
 \begin{equation}\label{eq:FDRest}
 \widehat{FDR}(\Delta) =  \frac{ \hat{\pi}_0(\lambda) \bar{R}^0(\Delta)}{R(\Delta)},
 \end{equation}
 where 
-$\bar{R}^0(\Delta) = \# \{F^0_{ib}| F^0_{ib} \ge \Delta, \; i=1,\ldots,G, b=1,\ldots,B  \} / B$ is 
+$\bar{R}^0(\Delta) = \# \{H^0_{ib}| H^0_{ib} \ge \Delta, \; i=1,\ldots,G, b=1,\ldots,B  \} / B$ is 
 the average number of significant genes in null data,
-and $R(\Delta) = \# \{F_i| F_i \ge \Delta, \; i=1,\ldots,G  \}$ is the number of significant genes in raw data.
-The estimate of a correction factor with the $\lambda$-quantile $m_\lambda$ of $F^0_{ib}$ is
-$\hat{\pi}_0(\lambda) = \# \{F_i| F_i \le m_\lambda  \}/\# \{F^0_{ib}| F^0_{ib} \le m_\lambda  \}$,
+and $R(\Delta) = \# \{H_i| H_i \ge \Delta, \; i=1,\ldots,G  \}$ is the number of significant genes in raw data.
+The estimate of a correction factor with the $\lambda$-quantile $m_\lambda$ of $H^0_{ib}$ is
+$\hat{\pi}_0(\lambda) = \# \{H_i| H_i \le m_\lambda  \}/\# \{H^0_{ib}| H^0_{ib} \le m_\lambda  \}$,
 which is required because of the different numbers of true insignificant genes in raw data and null data.  
 
-The function \Rfunction{hem.fdr} provides FDRs at all $F$ values and $F$ critical values for given target FDRs.  
+The function \Rfunction{hem.fdr} provides FDRs at all $H$ values and $H$ critical values for given target FDRs.  
 Example 3.1 shows how to obtain an FDR estimate using the \Rfunction{hem.fdr} function for the  primate brain data.
 
 \begin{verbatim}
@@ -316,12 +316,12 @@ use non-contant gamma prior with hyper-parameters ($\alpha_\epsilon, \beta_{\eps
 The parametric prior distribution can also be relaxed for variance parameters, as described in Section 3. 
 The summary statistic is defined as
 $
-F_i = \sum_{j=1}^C w_{i,j} (\bar{\mu}_{i,j}-\bar{\bar{\mu}}_{i})^2 /
+H_i = \sum_{j=1}^C w_{i,j} (\bar{\mu}_{i,j}-\bar{\bar{\mu}}_{i})^2 /
                              \bar{\sigma}^2_{\epsilon_{i,j}}.
 $
 
 
-The use of one-layer EM is demonstrated with the mouse B-cell development data set,
+The use of one-layer HEM is demonstrated with the mouse B-cell development data set,
 which consists of gene expression of the five consecutive stages
 (pre-B1, large pre-B2, small pre-B2, immature B, and mature B cells)
 of mouse B-cell development. The data was obtained with high-density oligonucleotide arrays,
@@ -331,17 +331,17 @@ Each of six sample replicates for pre-B1 cell and each of the five sample replic
 were hybridized on a chip, but there was no replicate for an identical sample condition
 ({\it i.e.}, $m_{i,1}=6$, $m_{i,2}=m_{i,3}=m_{i,4}=m_{i,5}=5$).
 
-Example 5.1 shows how to fit one-layer EM with $\mbox{Gamma}(\alpha_\epsilon,\beta_\epsilon)$ prior
+Example 5.1 shows how to fit one-layer HEM with $\mbox{Gamma}(\alpha_\epsilon,\beta_\epsilon)$ prior
 for variance parameter, $\sigma_{\epsilon_{i,j}}^{-2}$.
 Note that the design matrix consists of two columns: 
 one for condition and the other for (individual or experimental) replicate. 
-The argument \Rfunarg{n.layer=1} represents one-layer EM and 
+The argument \Rfunarg{n.layer=1} represents one-layer HEM and 
 the missing argument \Rfunarg{method.var.t=1} represents $\mbox{Gamma}(\alpha_\epsilon,\beta_\epsilon)$ prior
 for variance parameter, $\sigma_{\epsilon_{i,j}}^{-2}$.
 
 \begin{verbatim}
 
-Example 4.1: One-layer EM
+Example 5.1: One-layer HEM
 
 > data(mubcp)
 > dim(mubcp) #call MuBCP data
@@ -367,14 +367,14 @@ Example 4.1: One-layer EM
 > mubcp.nor <- hem.preproc(mubcp, cond=cond)                 #preprocessing
 
 
-> mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design)       #fit EM
+> mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design)       #fit HEM
 > mubcp.fdr <- hem.fdr(mubcp.nor, n.layer=1, design=design,  #get FDR 
                        hem.out=mubcp.hem)
 
 
 \end{verbatim}
 
-In Example 4.2, the arguments \Rfunarg{method.var.t="neb"}   
+In Example 5.2, the arguments \Rfunarg{method.var.t="neb"}   
 represent nonparametric EB prior specification.
 The prior estimate of total error variance from \Rfunction{hem.eb.prior} 
 is plugged into \Rfunarg{var.t} of \Rfunction{hem}.
@@ -382,11 +382,11 @@ is plugged into \Rfunarg{var.t} of \Rfunction{hem}.
 
 \begin{verbatim}
 
-Example 4.2: One-layer EB-EM
+Example 5.2: One-layer HEM with EB
 
 > mubcp.eb  <- hem.eb.prior(mubcp.nor, n.layer=1, design=design,     #EB
                             method.var.t="neb")       
-> mubcp.hem <- hem(mubcp.nor, n.layer=1, design=design,              #fit EM
+> mubcp.hem <- hem(mubcp.nor, n.layer=1, design=design,              #fit HEM
                    method.var.t="neb", var.t=mubcp.eb$var.t)
 > mubcp.fdr <- hem.fdr(mubcp.nor, n.layer=1, design=design,          #get FDR 
                        hem.out=mubcp.hem, eb.out=mubcp.eb)
@@ -457,7 +457,7 @@ prior parameters for inverse of total error variance (n.layer=1),
 \item{\Rfunarg{m.var.b}}: estimated biological variances, $\sigma^2_{b_{i,j}}$ (n.layer=2).
 \item{\Rfunarg{m.var.e}}: estimated experimental variances, $\sigma^2_{e_{i,j}}$ (n.layer=2).
 \item{\Rfunarg{m.var.t}}: estimated total variances, $\sigma^2_{\epsilon_{i,j}}$ (n.layer=1).
-\item{\Rfunarg{F}}: $F$-scores.
+\item{\Rfunarg{H}}: $H$-scores.
 \end{itemize}
 
 
@@ -511,9 +511,9 @@ hem.fdr(x, tr=" ", n.layer, design, hem.out, eb.out=NULL, n.iter=5, q.trim=0.9,
 \null \vspace{0.1in}
 \noindent The \Rfunction{hem.fdr} function provides the following values
 \begin{itemize}
-\item{\Rfunarg{fdr}}: $F$-scores and corresponding FDRs.
+\item{\Rfunarg{fdr}}: $H$-scores and corresponding FDRs.
 \item{\Rfunarg{pi0}}: estimated proportion of true negatives.
-\item{\Rfunarg{F.null}}: $F$-scores from null data.
+\item{\Rfunarg{H.null}}: $H$-scores from null data.
 \item{\Rfunarg{targets}}: given target FDRs; corrsponding critical values and numbers
           of significant genes are provided.
 \end{itemize}

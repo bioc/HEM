@@ -40,8 +40,7 @@ HyungJun Cho, PhD, and Jae K. Lee, PhD,
 
 \seealso{
 \code{\link{hem}}, 
-\code{\link{hem.fdr}}, 
-\code{\link{lpe}} 
+\code{\link{hem.fdr}}
 }
 
 

@@ -21,8 +21,7 @@ HyungJun Cho and Jae K. Lee
 \seealso{
 \code{\link{hem}}, 
 \code{\link{hem.eb.prior}}, 
-\code{\link{hem.fdr}}, 
-\code{\link{lpe}} 
+\code{\link{hem.fdr}}
 }
 
 

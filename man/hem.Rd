@@ -55,7 +55,7 @@ hem(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
 \item{m.var.b}{estimated biological variances (n.layer=2)}
 \item{m.var.e}{estimated experiemental variances (n.layer=2)}
 \item{m.var.t}{estimated total variances (n.layer=1)}
-\item{F}{F-scores} 
+\item{H}{H-scores} 
 }
 
 \author{
@@ -72,8 +72,7 @@ University of Virginia School of Medicine
 
 \seealso{
 \code{\link{hem.eb.prior}}, 
-\code{\link{hem.fdr}},
-\code{\link{lpe}} 
+\code{\link{hem.fdr}}
 }
 
 
@@ -98,8 +97,8 @@ pbrain.nor <- hem.preproc(pbrain[,2:13], cond=cond)
 pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design, 
                   burn.ins=10, n.samples=30)
 
-##print F-scores
-pbrain.hem$F 
+##print H-scores
+pbrain.hem$H 
 
 
 #Example 2: One-layer HEM
@@ -120,8 +119,8 @@ mubcp.nor <- hem.preproc(mubcp, cond=cond)
 mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design, 
              burn.ins=10, n.samples=30)
 
-##print F-scores
-mubcp.hem$F
+##print H-scores
+mubcp.hem$H
 
 
 ###NOTE: 

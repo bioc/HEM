@@ -47,9 +47,9 @@ hem.fdr <- function(dat, tr=" ", n.layer, design,
             if(tr=="loge" ) dat=log(dat)
         }
 
-        ###compute F under null with iterations
+        ###compute H-scores under null with iterations
         if(n.layer==2) {
-               F.null <- hem.null.two(dat,
+               H.null <- hem.null.two(dat,
                          n.layer      = n.layer, 
                          design       = design,
                          burn.ins     = hem.out$burn.ins, 
@@ -76,7 +76,7 @@ hem.fdr <- function(dat, tr=" ", n.layer, design,
 
 
         if(n.layer==1) {
-               F.null <- hem.null.one(dat,
+               H.null <- hem.null.one(dat,
                          n.layer      = n.layer, 
                          design       = design,
                          burn.ins     = hem.out$burn.ins, 
@@ -96,48 +96,47 @@ hem.fdr <- function(dat, tr=" ", n.layer, design,
         }
 
 
-
         ###compute FDR
-        len.F <- length(hem.out$F) 
-        F.null <- as.vector(F.null)
-        min.fdr <- 1.0/(len.F*n.iter)
+        len.H <- length(hem.out$H) 
+        H.null <- as.vector(H.null)
+        min.fdr <- 1.0/(len.H*n.iter)
 
-        m.c <- quantile(F.null, probs=q.trim)
-        pi0 <- length(which(hem.out$F <= m.c))/(len.F*q.trim)
+
+        m.c <- quantile(H.null, probs=q.trim)
+        pi0 <- length(which(hem.out$H <= m.c))/(len.H*q.trim)
         pi0 <- min(1, pi0)
 
-        F <- sort(hem.out$F, decreasing=TRUE) 
-        F.all <- c(F, F.null)
-        i.all <- c(rep(0, length(hem.out$F)), rep(1, length(F.null)))
-        i <- sort.list(F.all, decreasing=TRUE)
-        all <- data.frame(F.all[i], i.all[i])
+        H <- sort(hem.out$H, decreasing=TRUE) 
+        H.all <- c(H, H.null)
+        i.all <- c(rep(0, length(hem.out$H)), rep(1, length(H.null)))
+        i <- sort.list(H.all, decreasing=TRUE)
+        all <- data.frame(H.all[i], i.all[i])
+
 
         V <- 1.0*cumsum(all[,2])/n.iter; V <- V[which(all[,2]==0)]
         R <- 1:length(V)
         FDR <- V/R*pi0; FDR[FDR<=0] <- min.fdr; FDR[FDR> 1] <- 1
-        fdr <- round(data.frame(F, FDR),n.digits)
-
+        fdr <- round(data.frame(H, FDR),n.digits)
 
 
         ###find critical values at target FDRs
         n.target <- length(target.fdr)
-        F.critical <- rep(NA, n.target)
+        H.critical <- rep(NA, n.target)
         n.sig.genes <- rep(NA, n.target)
         min.FDR <- min(FDR)
 
         for(i in 1:n.target) {
             if(target.fdr[i] >= min.FDR){
                k <- max(which(fdr$FDR <= target.fdr[i]))
-               F.critical[i] <- round(F[k],n.digits)
-               n.sig.genes[i] <- length(which(hem.out$F >= F.critical[i]))
+               H.critical[i] <- round(H[k],n.digits)
+               n.sig.genes[i] <- length(which(hem.out$H >= H.critical[i]))
             }
         }
 
         target.FDR <- target.fdr
-        targets <- data.frame(target.FDR, F.critical, n.sig.genes)
+        targets <- data.frame(target.FDR, H.critical, n.sig.genes)
          
         if(print.message.on.screen) cat("Done.\n")
-
-        return(list(fdr=fdr, pi0=pi0, q.trim=q.trim, n.iter=n.iter, F.null=F.null, targets=targets))
+        return(list(fdr=fdr, pi0=pi0, q.trim=q.trim, n.iter=n.iter, H.null=H.null, targets=targets))
 
 }

@@ -24,9 +24,9 @@ hem.fdr(dat,  tr=" ", n.layer, design, hem.out, eb.out=NULL, n.iter=5, q.trim=0.
 }
 
 \value{
-\item{fdr}{F-values and corresponding FDRs}
+\item{fdr}{H-values and corresponding FDRs}
 \item{pi0}{estimated proportion of true negatives}
-\item{F.null}{F-values from null data}
+\item{H.null}{H-scores from null data}
 \item{targets}{given target FDRs, corrsponding critical values and numbers of significant genes are provided}
 }
 
@@ -73,8 +73,5 @@ pbrain.fdr <- hem.fdr(pbrain.nor, n.layer=2,  design=design,
                   hem.out=pbrain.hem, eb.out=pbrain.eb)
 
 }
-
-
-
 
 \keyword{models}

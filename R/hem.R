@@ -7,12 +7,12 @@
 #              Division of Biostatistics and Epidemiology
 #              University of Virginia School of Medicine
 #
-#                   Version 1.0.0. (2004-05-04)   
+#                   Version 1.0.2 (2004-05-25)   
 #
 ##########################################################################
 
 .First.lib <- function(lib, pkg) { 
-   cat("HEM version 1.0.0 (2004-05-04)\n") 
+   cat("HEM version 1.0.2 (2004-05-25)\n") 
    library.dynam("HEM", pkg, lib)
    invisible()
    if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") { addPDF2Vig("HEM") }
@@ -109,7 +109,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
           varb <- 1
           if(method.varb==2) varb <- var.b 
 
-          #Fit an error model
+          #Fit HEM
           if(print.message.on.screen) cat("Modeling fitting...Please wait.\n")
           fit.hem <- .C("twolayerhem", 
                        as.double(t(dat)),  as.integer(opt),
@@ -133,8 +133,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
           names(samples) <- c("expr", "var.e", "mu", "gene", "cond", "inter", "var.b") 
 
           priors <- par
-          F <- fit.hem$fstat
-          #PP <- fit.hem$pprob
+          H <- fit.hem$fstat
 
           return(list(n.layer=n.layer, tr=tr, method.var.e=method.var.e, method.var.b=method.var.b, 
                  n.gene = n.gene, n.chip = n.chip, n.cond = n.cond, design=design, 
@@ -143,8 +142,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
                  m.x = round(m.x,n.digits), 
                  m.var.b = round(m.var.b,n.digits), 
                  m.var.e = round(m.var.e,n.digits), 
-                 F = round(F,n.digits), 
-                 #PP = round(PP,n.digits),
+                 H = round(H,n.digits), 
                  samples = round(samples, n.digits))
             )
     }
@@ -186,8 +184,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
           m.mu <- t(fit.hem$mexprest) 
           m.var.t <- t(fit.hem$msigma2) 
           priors <- par
-          F <- fit.hem$fstat
-          #PP <- fit.hem$pprob
+          H <- fit.hem$fstat
           samples <- data.frame(t(fit.hem$MCMCsamp))
           names(samples) <- c("mu", "gene", "cond", "inter", "var.t") 
 
@@ -198,8 +195,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
                  burn.ins = burn.ins, n.samples = n.samples, priors = priors, 
                  m.mu = round(m.mu,n.digits), 
                  m.var.t = round(m.var.t,n.digits), 
-                 F=round(F,n.digits), 
-                 #PP=round(PP,n.digits),
+                 H=round(H,n.digits), 
                  samples = round(samples, n.digits)))
     }
 }

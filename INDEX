@@ -1,0 +1,4 @@
+hem            estimating parameters in a hierarchical error model (HEM)
+hem.eb.prior   estimating baseline error variances     
+hem.fdr        computing FDR    
+hem.preproc    preprocess such as IQR normalization, thesholing, log2-transformation

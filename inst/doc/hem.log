@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159-14h-released-20010417 (Web2C 7.3.3.1) (format=pdflatex 2003.2.18)  14 SEP 2004 10:35
-**\nonstopmode \input /afs/cs.wisc.edu/u/h/y/hyungjun/Rlibs/H1.0.3/HEM/inst/doc
-/hem.tex
-(/afs/cs.wisc.edu/u/h/y/hyungjun/Rlibs/H1.0.3/HEM/inst/doc/hem.tex
+This is pdfTeX, Version 3.14159-14h-released-20010417 (Web2C 7.3.3.1) (format=pdflatex 2003.2.18)  14 OCT 2004 10:19
+**\nonstopmode \input /afs/cs.wisc.edu/u/h/y/hyungjun/Rlibs/HEM/inst/doc/hem.te
+x
+(/afs/cs.wisc.edu/u/h/y/hyungjun/Rlibs/HEM/inst/doc/hem.tex
 (/usr/share/texmf/tex/latex/base/article.cls
 Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
 (/usr/share/texmf/tex/latex/base/size12.clo
@@ -175,7 +175,7 @@ Package: natbib 1999/05/28 7.0 (PWD)
 LaTeX Info: Redefining \cite on input line 508.
 \c@NAT@ctr=\count111
 )
-(/unsup/R-1.9.1/lib/R/share/texmf/Sweave.sty
+(/unsup/R-2.0.0/lib/R/share/texmf/Sweave.sty
 (/usr/share/texmf/tex/latex/base/fontenc.sty
 Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
 
@@ -229,7 +229,7 @@ Style option: `fancyvrb' v2.6, with DG/SPQR fixes <1998/07/17> (tvz)
 \FV@OutFile=\write4
 
 No file fancyvrb.cfg.
-) (/unsup/R-1.9.1/lib/R/share/texmf/upquote.sty
+) (/unsup/R-2.0.0/lib/R/share/texmf/upquote.sty
 Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
 atim and verb
 
@@ -303,13 +303,11 @@ loading : Context Support Macros / PDF
 \openout6 = `hem.toc'.
 
 LaTeX Font Info:    Try loading font information for TS1+aer on input line 42.
-LaTeX Font Info:    No file TS1aer.fd. on input line 42.
-
-
-LaTeX Font Warning: Font shape `TS1/aer/m/n' undefined
-(Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textbullet' on input line 42.
-
+ (/unsup/R-2.0.0/lib/R/share/texmf/ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 42.
 
 Overfull \vbox (21.68121pt too high) has occurred while \output is active []
 
@@ -423,26 +421,22 @@ Overfull \hbox (2.18683pt too wide) in paragraph at lines 500--500
 Overfull \vbox (21.68121pt too high) has occurred while \output is active []
 
 
-[11] (./hem.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
- ) 
+[11] (./hem.aux) ) 
 Here is how much of TeX's memory you used:
- 5142 strings out of 50453
- 65914 string characters out of 688420
+ 5157 strings out of 50453
+ 66171 string characters out of 688420
  126579 words of memory out of 1500001
- 8041 multiletter control sequences out of 10000+25000
+ 8055 multiletter control sequences out of 10000+25000
  28634 words of font info for 66 fonts, out of 400000 for 1000
  14 hyphenation exceptions out of 10000
- 35i,6n,36p,329b,320s stack positions out of 3000i,500n,3000p,50000b,5000s
-</usr/share/texmf/fonts/type1/bluesky/cm/cmex10.pfb></usr/share/texmf/fonts/t
-ype1/bluesky/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi6.pfb></
-usr/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf/fonts/type1/b
-luesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi8.pfb></usr/s
-hare/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/texmf/fonts/type1/blue
-sky/cm/cmtt12.pfb> </var/lib/texmf/pk/ljfour/jknappen/tc/tcrm1200.600pk></usr/s
-hare/texmf/fonts/type1/bluesky/cm/cmti12.pfb></usr/share/texmf/fonts/type1/blue
-sky/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/shar
-e/texmf/fonts/type1/bluesky/cm/cmr17.pfb>
-Output written on hem.pdf (11 pages, 122323 bytes).
+ 35i,6n,36p,322b,320s stack positions out of 3000i,500n,3000p,50000b,5000s
+</usr/share/texmf/fonts/type1/bluesky/cm/cmex10.pfb></usr/sha
+re/texmf/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/bluesky
+/cm/cmmi6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/tex
+mf/fonts/type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/c
+mmi8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/texmf/
+fonts/type1/bluesky/cm/cmtt12.pfb> </var/lib/texmf/pk/ljfour/jknappen/tc/tcrm12
+00.600pk></usr/share/texmf/fonts/type1/bluesky/cm/cmti12.pfb></usr/share/texmf/
+fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr1
+2.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr17.pfb>
+Output written on hem.pdf (11 pages, 122317 bytes).

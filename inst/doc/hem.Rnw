@@ -1,8 +1,8 @@
 % -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
 %\VignetteIndexEntry{HEM Overview}
 %\VignetteKeywords{Heterogeneous Error Model, Bayesian, Emprical Bayes}
-%\VignetteDepends{hem}
-%\VignettePackage{hem}
+%\VignetteDepends{HEM}
+%\VignettePackage{HEM}
 %documentclass[12pt, a4paper]{article}
 \documentclass[12pt]{article}
 

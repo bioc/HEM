@@ -1,12 +1,11 @@
 Package: HEM
-Version: 1.0.4
-Date: 2004-10-14
+Version: 1.0.5
+Date: 2005-04-25
 Title: Heterogeneous error model for analysis of microarray data
 Author: HyungJun Cho <hcho@virginia.edu> and
          Jae K. Lee <jaeklee@virginia.edu>
 Maintainer: HyungJun Cho <hcho@virginia.edu>
-Depends: R (>= 2.0.0), Biobase 
+Depends: R (>= 2.0.1), Biobase 
 Description: This package fits heterogeneous error models for analysis of microarray data
 License: GPL version 2 or newer
-URL:http://www.healthsystem.virginia.edu/internet/hes/biostat/bioinformatics/
-Packaged: Thu Oct 14 10:19:09 2004; hyungjun
+URL: http://www.healthsystem.virginia.edu/internet/hes/biostat/bioinformatics

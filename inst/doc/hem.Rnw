@@ -26,7 +26,8 @@
 
 \author{HyungJun Cho and Jae K. Lee}
 \begin{document}
-\title{Heterogeneous Error Model (HEM) \\ for Analysis of Microarray Data}
+\title{Heterogeneous Error Model (HEM) for Identification of \\
+      Differentially Expressed Genes Under Multiple Conditions}
 
 \maketitle
 \tableofcontents

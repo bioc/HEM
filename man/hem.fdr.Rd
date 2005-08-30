@@ -5,15 +5,15 @@
 Computes resampling-based False Discovery Rate (FDR) 
 }
 \usage{
-hem.fdr(dat,  tr=" ", n.layer, design, hem.out, eb.out=NULL, n.iter=5, q.trim=0.9, 
-        target.fdr=c(0.001,0.005,0.01,0.05,0.1,0.15,0.20,0.30,0.40,0.50), 
+hem.fdr(dat,  n.layer, design, rep=TRUE, hem.out, eb.out=NULL, n.iter=5, q.trim=0.9,
+        target.fdr=c(0.001, 0.005, 0.01, 0.05, 0.1, 0.15, 0.20, 0.30, 0.40, 0.50),
         n.digits=10, print.message.on.screen=TRUE)
 }
 \arguments{
 \item{dat}{data}
-\item{tr}{if "log2", "log10", or "loge", then log-transformation (with base 2, 10, or e respectively) is taken. }
 \item{n.layer}{number of layers: 1=one-layer EM; 2=two-layer EM}
 \item{design}{design matrix}
+\item{rep}{no replication if FALSE}  
 \item{hem.out}{output from hem function}
 \item{eb.out}{output from hem.eb.prior function}
 \item{n.iter}{number of iterations}

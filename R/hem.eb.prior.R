@@ -1,14 +1,17 @@
 ##################################################
 #
 #  Empirical Bayes (EB) Prior Specification
+#  Updated on 2005.08.12
 #
 ##################################################
 
-hem.eb.prior <- function(dat, tr=" ",  n.layer, design, 
+hem.eb.prior <- function(dat,  n.layer, design, 
                 method.var.e="neb", method.var.b="peb", method.var.t="neb", 
+                rep=TRUE, baseline.var="LPE", p.remove=0, max.chip=4,
                 q=0.01, B=25, n.digits=10, print.message.on.screen=TRUE)
 {
 
+     if(n.layer != 1 & n.layer != 2) stop("n.layer should be 1 or 2.")       
      if(print.message.on.screen) cat("EB...Please wait.\n")
 
      #Organize design
@@ -27,31 +30,13 @@ hem.eb.prior <- function(dat, tr=" ",  n.layer, design,
      else  i <- order(design[,1],design[,2])
      dat <- dat[,i]
      design <- design[i,]
-
-     if(tr==" ") {
-        min.value <- -9
-        if(any(is.na(dat))) dat[is.na(dat)] <- min.value
-        if(!is.matrix(dat)) dat <- as.matrix(dat)
-        dat[which(dat <= min.value, arr.ind=TRUE)] <- NA
-     }
-
-     if(tr!=" "){
-        min.value <- 0.001
-        if(any(is.na(dat))) dat[is.na(dat)] <- min.value
-        if(!is.matrix(dat)) dat <- as.matrix(dat)
-        dat[which(dat <= min.value, arr.ind=TRUE)] <- NA
-
- 
-        if(tr=="log2" ) dat=log2(dat)
-        if(tr=="log10") dat=log10(dat)
-        if(tr=="loge" ) dat=log(dat)
-     }
-     dat <- data.frame(dat)
+     if(!is.data.frame(dat)) dat <- data.frame(dat)
 
 
      if(nrow(dat)*q <10) stop("q is too small")
      if(q > 0.5) stop("q is too large")
- 
+
+     #parameters 
      n.gene <- nrow(dat)
      n.chip <- ncol(dat)
      cond   <- design[,1]
@@ -60,8 +45,9 @@ hem.eb.prior <- function(dat, tr=" ",  n.layer, design,
      c.size <- table(design[,1])
      n.bin <- length(seq(0,1,q)) - 1
 
-     if(n.layer != 1 & n.layer != 2) stop("n.layer should be 1 or 2.")       
 
+     ########################################################################################
+     #EB for two-layer HEM
      if(n.layer==2) 
      {
 
@@ -122,7 +108,9 @@ hem.eb.prior <- function(dat, tr=" ",  n.layer, design,
     }
 
 
-    if(n.layer==1) 
+    ########################################################################################
+    #EB for one-layer HEM with replication
+    if((n.layer==1) & rep) 
     {
 
           method.vart <- ifelse(method.var.t=="peb", 2, ifelse(method.var.t=="neb", 3, 0))
@@ -165,6 +153,39 @@ hem.eb.prior <- function(dat, tr=" ",  n.layer, design,
     }
 
 
+    ########################################################################################
+    #EB for one-layer HEM without replication
+    if((n.layer==1) & !rep) 
+    {
+
+          method.vart <- ifelse(method.var.t=="peb", 2, ifelse(method.var.t=="neb", 3, 0))
+          if(method.vart < 2 | method.vart > 3) stop("method.var.t = peb or neb")
+
+          #Parametric EB priors
+          med.expr <- round(dat, n.digits)
+          var.par <- par.no.error.Olig(dat, q=q, baseline.var=baseline.var, p.remove=p.remove) 
+          var.tot <-  round(var.par$var.total, n.digits)                 
+          if(method.vart==2) var.t <- var.tot
+ 
+          #Nonparametric EB prior
+          if(method.vart==3) {
+             var.t <- matrix(NA,1,n.bin) 
+             var.nonpar <- nonpar.no.error.Olig(dat, q=q, B=B, 
+                           baseline.var=baseline.var, p.remove=p.remove, 
+                           print.message.on.screen=FALSE) 
+             for(j in 1:n.cond) var.t <- rbind(var.t,var.nonpar)
+             var.t <- round(var.t[-1,], n.digits)
+          }
+
+          if(print.message.on.screen) cat(" Done.\n")
+          return(list(med.expr = med.expr, var.tot=var.tot, var.t=var.t, q=q, B=B, 
+                      rep=rep, baseline.var=baseline.var, p.remove=p.remove))  
+
+    }
+
+
 }
+
+######END############################################################################
 
 

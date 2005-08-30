@@ -106,7 +106,7 @@ hem.null.two <- function (dat, n.layer, design, burn.ins = 1000, n.samples = 300
                                var.g = var.g, var.c = var.c, var.r = var.r,
                                alpha.e = alpha.e, beta.e = beta.e, 
                                alpha.b = alpha.b, beta.b = beta.b, 
-                               print.message.on.screen=FALSE)$H
+                               print.message.on.screen=FALSE)$H[,1] #H. Cho
        }
 
        return(F.null)

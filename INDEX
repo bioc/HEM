@@ -1,4 +1,4 @@
-hem            estimating parameters in heterogeneous error models (HEM)
+hem            estimating parameters in heterogeneous error models
 hem.eb.prior   estimating baseline error variances     
 hem.fdr        computing FDR    
 hem.preproc    preprocess such as IQR normalization, thresholding, log2-transformation

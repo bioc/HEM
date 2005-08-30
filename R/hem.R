@@ -1,34 +1,38 @@
 
 ##########################################################################
 #
-#        Heterogeneous Error Model (HEM) for Analysis of Microarray Data
+#        Heterogeneous Error Model (HEM) for Identification of 
+#        Differentially Expressed Genes Under Multiple Conditions
 #
 #          developed by HyungJun Cho, PhD, and Jae K. Lee, PhD,
 #              (hcho@virginia.edu; jaeklee@virginia.edu)           
 #              Division of Biostatistics and Epidemiology
 #              University of Virginia School of Medicine
 #
-#                   Version 1.0.4 (2004-10-14)   
+#                   Version 1.1.1 (2005-08-11)   
 #
 ##########################################################################
 
 .First.lib <- function(lib, pkg) { 
-   cat("HEM version 1.0.4 (2004-10-14)\n") 
+   cat("HEM version 1.1.1 \n") 
    library.dynam("HEM", pkg, lib)
    invisible()
-   if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") { addVigs2WinMenu("HEM") }
+   if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") 
+      {addVigs2WinMenu("HEM") }
 }
 
 
 #####main function
-hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
+hem <- function(dat, probe.ID=NULL, n.layer, design, burn.ins=1000, n.samples=3000,
                 method.var.e="gam", method.var.b="gam", method.var.t="gam",           
                 var.e=NULL, var.b=NULL, var.t=NULL, 
                 var.g=1, var.c=1, var.r=1,
                 alpha.e=3, beta.e=.1, alpha.b=3, beta.b=.1, alpha.t=3, beta.t=.2,
                 n.digits=10, print.message.on.screen=TRUE)
 {
-                
+
+        if(n.layer < 1 | n.layer >2) print("ERROR: n.layer = 1 or 2")       
+        if(length(probe.ID) ==0) probe.ID <- 1:nrow(dat)                
 
         #Organize design
         ncol.design <- ncol(design)
@@ -46,25 +50,7 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
         dat <- dat[,i]
         design <- design[i,]
 
-        if(tr==" ") {
-           min.value <- -9
-           if(any(is.na(dat))) dat[is.na(dat)] <- min.value
-           if(!is.matrix(dat)) dat <- as.matrix(dat)
-           dat[which(dat <= min.value, arr.ind=TRUE)] <- min.value
-        }
-
-        if(tr!=" "){
-
-           min.value <- 0.001
-           if(any(is.na(dat))) dat[is.na(dat)] <- min.value
-           if(!is.matrix(dat)) dat <- as.matrix(dat)
-           dat[which(dat <= min.value, arr.ind=TRUE)] <- min.value
- 
-           if(tr=="log2" ) dat=log2(dat)
-           if(tr=="log10") dat=log10(dat)
-           if(tr=="loge" ) dat=log(dat)
-        }
- 
+        #parameters 
         nMCMC  <- c(burn.ins,n.samples)
         n.Runs <- 1 + burn.ins + n.samples
         n.gene <- nrow(dat)
@@ -75,9 +61,8 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
         c.size <- table(design[,1])
         ndat   <- c(n.gene, n.chip, n.cond)
 
-
-     if(n.layer < 1 | n.layer >2) print("ERROR: n.layer = 1 or 2")       
-
+     ########################################################################################
+     #Two-layer HEM
      if(n.layer==2) 
      {
           par <-  c(var.g, var.c, var.r, alpha.e, beta.e, alpha.b, beta.b)
@@ -134,9 +119,10 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
           names(samples) <- c("expr", "var.e", "mu", "gene", "cond", "inter", "var.b") 
 
           priors <- par
-          H <- fit.hem$fstat
+          H <- data.frame(matrix(fit.hem$fstat))
+          rownames(H) <- probe.ID
 
-          return(list(n.layer=n.layer, tr=tr, method.var.e=method.var.e, method.var.b=method.var.b, 
+          return(list(n.layer=n.layer, method.var.e=method.var.e, method.var.b=method.var.b, 
                  n.gene = n.gene, n.chip = n.chip, n.cond = n.cond, design=design, 
                  burn.ins = burn.ins, n.samples = n.samples, priors = priors, 
                  m.mu = round(m.mu,n.digits), 
@@ -148,6 +134,8 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
             )
     }
 
+    ########################################################################################
+    #One-layer HEM
     if(n.layer==1) 
     {
 
@@ -185,13 +173,16 @@ hem <- function(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
           m.mu <- t(fit.hem$mexprest) 
           m.var.t <- t(fit.hem$msigma2) 
           priors <- par
-          H <- fit.hem$fstat
           samples <- data.frame(t(fit.hem$MCMCsamp))
           names(samples) <- c("mu", "gene", "cond", "inter", "var.t") 
 
+          H <- fit.hem$fstat
+          H <- data.frame(matrix(fit.hem$fstat))
+          rownames(H) <- probe.ID
+
           if(print.message.on.screen) cat(" Done.\n")
  
-          return(list(n.layer=n.layer, tr=tr, method.var.t=method.var.t, 
+          return(list(n.layer=n.layer,  method.var.t=method.var.t, 
                  n.gene = n.gene, n.chip = n.chip, n.cond = n.cond, design=design, 
                  burn.ins = burn.ins, n.samples = n.samples, priors = priors, 
                  m.mu = round(m.mu,n.digits), 

@@ -6,14 +6,14 @@ Estimates experimental and biological variances by LPE and resampling
 }
 
 \usage{
-hem.eb.prior(dat, tr=" ",  n.layer, design, 
+hem.eb.prior(dat,  n.layer, design, 
              method.var.e="neb", method.var.b="peb", method.var.t="neb", 
+             rep=TRUE, baseline.var="LPE", p.remove=0, max.chip=4,
              q=0.01, B=25, n.digits=10, print.message.on.screen=TRUE)
 }
 
 \arguments{
 \item{dat}{data}
-\item{tr}{if "log2", "log10", or "loge", then log-transformation (with base 2, 10, or e respectively) is taken.}
 \item{n.layer}{number of layers}
 \item{design}{design matrix}
 \item{method.var.e}{prior specification method for experimental variance;  
@@ -22,6 +22,10 @@ hem.eb.prior(dat, tr=" ",  n.layer, design,
 "peb"=parametric EB prior specification}
 \item{method.var.t}{prior specification method for total variance; 
 "peb"=parametric EB prior specification, "neb"=nonparametric EB prior specification}        
+\item{rep}{no replication if FALSE}
+\item{baseline.var}{baseline variance estimation method: LPE for replicated data and BLPE, PSE, or ASE for unreplicated data}
+\item{p.remove}{percent of removed rank-variance genes for BLPE}
+\item{max.chip}{maximum number of chips to estimate errors}
 \item{q}{quantile for paritioning genes based on expression levels}
 \item{B}{number of iterations for resampling}
 \item{n.digits}{number of digits}
@@ -35,7 +39,7 @@ hem.eb.prior(dat, tr=" ",  n.layer, design,
 }
 
 \author{
-HyungJun Cho, PhD, and Jae K. Lee, PhD,
+HyungJun Cho and Jae K. Lee
 }
 
 \seealso{

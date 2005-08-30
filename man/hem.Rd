@@ -1,11 +1,11 @@
 \name{hem}
 \alias{hem}
-\title{Heterogeneous Error Model (HEM) for Microarray Data}
+\title{Heterogeneous Error Model for Identification of Differential Expressed Genes Under Multiple Conditions}
 \description{
 Fits an error model with heterogeneous experimental and biological variances.
 }
 \usage{
-hem(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
+hem(dat, probe.ID=NULL, n.layer, design, burn.ins=1000, n.samples=3000,
     method.var.e="gam", method.var.b="gam", method.var.t="gam",           
     var.e=NULL, var.b=NULL, var.t=NULL, var.g=1, var.c=1, var.r=1,
     alpha.e=3, beta.e=.1, alpha.b=3, beta.b=.1, alpha.t=3, beta.t=.2,
@@ -13,7 +13,7 @@ hem(dat, tr=" ", n.layer, design, burn.ins=1000, n.samples=3000,
 }
 \arguments{
 \item{dat}{data}
-\item{tr}{if "log2", "log10", or "loge", then log-transformation (with base 2, 10, or e respectively) is taken. }
+\item{probe.ID}{a vector of probe set IDs}
 \item{n.layer}{number of layers; 1=one-layer EM, 2=two-layer EM}
 \item{design}{design matrix}
 \item{burn.ins}{number of burn-ins for MCMC}
@@ -64,15 +64,7 @@ Bioinformatics, 20: 2016-2025.
 }
 
 \author{
- HyungJun Cho, PhD, and Jae K. Lee, PhD,
-\cr
-Division of Biostatistics and Epidemiology
-\cr
-Department of Health Evaluation Sciences
-\cr
-University of Virginia School of Medicine
-\cr
-(hcho@virginia.edu; jaeklee@virginia.edu)
+ HyungJun Cho and Jae K. Lee
 }
 
 \seealso{

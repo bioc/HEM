@@ -96,7 +96,7 @@ hem.null.one <- function (dat, n.layer, design, burn.ins = 1000, n.samples = 300
                                method.var.t = method.var.t, var.t = eb.out$var.t,
                                var.g = var.g, var.c = var.c, var.r = var.r,
                                alpha.t = alpha.t, beta.t = beta.t,
-                               print.message.on.screen=FALSE)$H
+                               print.message.on.screen=FALSE)$H[,1]
         }
  
         return(F.null)

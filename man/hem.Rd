@@ -113,19 +113,15 @@ mubcp.nor <- hem.preproc(mubcp)
 #fit HEM with one layers of error
 #using the small numbers of burn-ins and MCMC samples for a testing purpose;
 #but increase the numbers for a practical purpose 
-mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design, 
-             burn.ins=10, n.samples=30)
+mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design, burn.ins=10, n.samples=30)
 
 ##print H-scores
 mubcp.hem$H
 
 
-###NOTE: 
-###see help(hem.eb.prior) for examples 
-###    with Empirical Bayes (EB) prior sepecification
-###see help(hem.fdr)  for examples with FDR evaluation
-
-
+###NOTE: Use 'hem.fdr' for FDR evaluation
+###NOTE: Use 'hem.eb.prior' for Empirical Bayes (EB) prior sepecification
+###NOTE: Use EB-HEM ('hem' after 'hem.eb.prior') for small data sets
 
 }
 

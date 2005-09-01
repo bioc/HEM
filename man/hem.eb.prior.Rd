@@ -105,10 +105,6 @@ mubcp.eb  <- hem.eb.prior(mubcp.nor, n.layer=1, design=design,
 mubcp.hem <- hem(mubcp.nor, n.layer=1, design=design,  burn.ins=10, n.samples=30, 
              method.var.t="neb", var.t=mubcp.eb$var.t)
 
-
-###NOTE: see help(hem.fdr) for examples with FDR evaluation
-###NOTE: see help(hem) for examples without EB
-
 }
 
 

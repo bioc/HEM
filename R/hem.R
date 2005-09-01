@@ -9,12 +9,12 @@
 #              Division of Biostatistics and Epidemiology
 #              University of Virginia School of Medicine
 #
-#                   Version 1.1.1 (2005-08-11)   
+#                   Version 1.1.3 (2005-09-01)   
 #
 ##########################################################################
 
 .First.lib <- function(lib, pkg) { 
-   cat("HEM version 1.1.1 \n") 
+   cat("HEM version 1.1.3 \n") 
    library.dynam("HEM", pkg, lib)
    invisible()
    if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") 

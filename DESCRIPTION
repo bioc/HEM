@@ -1,0 +1,11 @@
+Package: HEM
+Version: 1.1.3
+Date: 2005-09-01
+Title: Heterogeneous error model for identification of differentially expressed genes under multiple conditions
+Author: HyungJun Cho <hcho@virginia.edu> and
+         Jae K. Lee <jaeklee@virginia.edu>
+Maintainer: HyungJun Cho <hcho@virginia.edu>
+Depends: R (>= 2.1.0), Biobase 
+Description: This package fits heterogeneous error models for analysis of microarray data
+License: GPL version 2 or newer
+URL:http://www.healthsystem.virginia.edu/internet/hes/biostat/bioinformatics/

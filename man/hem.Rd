@@ -91,11 +91,11 @@ pbrain.nor <- hem.preproc(pbrain[,2:13])
 ##fit HEM with two layers of error
 ##using the small numbers of burn-ins and MCMC samples for a testing purpose;
 ##but increase the numbers for a practical purpose 
-pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design, 
-                  burn.ins=10, n.samples=30)
+#pbrain.hem <- hem(pbrain.nor, n.layer=2, design=design, 
+#                  burn.ins=10, n.samples=30)
 
 ##print H-scores
-pbrain.hem$H 
+#pbrain.hem$H 
 
 
 #Example 2: One-layer HEM
@@ -113,10 +113,10 @@ mubcp.nor <- hem.preproc(mubcp)
 #fit HEM with one layers of error
 #using the small numbers of burn-ins and MCMC samples for a testing purpose;
 #but increase the numbers for a practical purpose 
-mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design, burn.ins=10, n.samples=30)
+#mubcp.hem <- hem(mubcp.nor, n.layer=1,design=design, burn.ins=10, n.samples=30)
 
 ##print H-scores
-mubcp.hem$H
+#mubcp.hem$H
 
 
 ###NOTE: Use 'hem.fdr' for FDR evaluation

@@ -68,15 +68,15 @@ pbrain.nor <- hem.preproc(pbrain[,2:13])
 pbrain.nor <- pbrain.nor[1:1000,]
 
 ##estimate hyperparameters of variances by LPE
-pbrain.eb  <- hem.eb.prior(pbrain.nor, n.layer=2,  design=design,
-                           method.var.e="neb", method.var.b="peb")     
+#pbrain.eb  <- hem.eb.prior(pbrain.nor, n.layer=2,  design=design,
+#                           method.var.e="neb", method.var.b="peb")     
 
 #fit HEM with two layers of error
 #using the small numbers of burn-ins and MCMC samples for a testing purpose;
 #but increase the numbers for a practical purpose 
-pbrain.hem <- hem(pbrain.nor, n.layer=2,  design=design,burn.ins=10, n.samples=30, 
-              method.var.e="neb", method.var.b="peb", 
-              var.e=pbrain.eb$var.e, var.b=pbrain.eb$var.b)
+#pbrain.hem <- hem(pbrain.nor, n.layer=2,  design=design,burn.ins=10, n.samples=30, 
+#              method.var.e="neb", method.var.b="peb", 
+#              var.e=pbrain.eb$var.e, var.b=pbrain.eb$var.b)
 
 
 #Example 2: One-layer HEM with EB prior specification
@@ -96,14 +96,14 @@ mubcp.nor <- hem.preproc(mubcp)
 mubcp.nor <- mubcp.nor[1:1000,] 
 
 ##estimate hyperparameters of variances by LPE
-mubcp.eb  <- hem.eb.prior(mubcp.nor, n.layer=1, design=design,
-             method.var.t="neb")                                
+#mubcp.eb  <- hem.eb.prior(mubcp.nor, n.layer=1, design=design,
+#             method.var.t="neb")                                
 
 #fit HEM with two layers of error
 #using the small numbers of burn-ins and MCMC samples for a testing purpose;
 #but increase the numbers for a practical purpose 
-mubcp.hem <- hem(mubcp.nor, n.layer=1, design=design,  burn.ins=10, n.samples=30, 
-             method.var.t="neb", var.t=mubcp.eb$var.t)
+#mubcp.hem <- hem(mubcp.nor, n.layer=1, design=design,  burn.ins=10, n.samples=30, 
+#             method.var.t="neb", var.t=mubcp.eb$var.t)
 
 }
 

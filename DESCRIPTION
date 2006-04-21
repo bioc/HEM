@@ -9,3 +9,4 @@ Depends: R (>= 2.1.0), Biobase
 Description: This package fits heterogeneous error models for analysis of microarray data
 License: GPL version 2 or newer
 URL:http://www.healthsystem.virginia.edu/internet/hes/biostat/bioinformatics/
+biocViews: Microarray, DifferentialExpression, Statistics

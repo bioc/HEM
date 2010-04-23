@@ -1,0 +1,20 @@
+useDynLib(HEM)
+
+importFrom(Biobase, addVigs2WinMenu)
+importFrom(grDevices, replayPlot)
+importFrom(stats, as.ts, coef, dendrapply, deviance, end, formula,
+           frequency, IQR, is.leaf, knots, median, na.exclude, na.omit,
+           naprint, pf, pnorm, predict, print.anova, printCoefmat, pt,
+           quantile, reformulate, residuals, rnorm, runif,
+           smooth.spline, start, symnum, terms, time, ts, tsp, var,
+           write.ftable)
+importFrom(utils, browseURL, menu, str, toBibtex)
+
+export(am.tran, am.tran.half, base.ASE.Olig, base.error.Olig,
+       base.error.Olig.quanOnly, base.PSE.Olig, boot.base.ASE.Olig,
+       boot.base.error.Olig, boot.base.PSE.Olig,
+       fixbound.predict.smooth.spline, hem, hem.eb.prior, hem.fdr,
+       hem.null.no, hem.null.one, hem.null.two, hem.preproc,
+       nonpar.error.Olig, nonpar.no.error.Olig, nonpar.rep.error.Olig,
+       par.error.Olig, par.no.error.Olig, par.rep.error.Olig, permut,
+       quant.normal, quant.normal2, remove.sig.genes)

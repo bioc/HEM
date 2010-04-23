@@ -12,10 +12,7 @@
 ##########################################################################
 
 .First.lib <- function(lib, pkg) { 
-   cat("HEM version 1.1.4 \n") 
-   library.dynam("HEM", pkg, lib)
-   invisible()
-   if(.Platform$OS.type=="windows" && require(Biobase) && interactive() && .Platform$GUI=="Rgui") 
+   if(.Platform$OS.type=="windows" && interactive() && .Platform$GUI=="Rgui") 
       {addVigs2WinMenu("HEM") }
 }
 

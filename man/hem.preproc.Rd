@@ -28,8 +28,6 @@ HyungJun Cho and Jae K. Lee
 
 \examples{
 
-library(HEM)
-
 data(pbrain)
 pbrain.nor <- hem.preproc(pbrain[,2:13])
 

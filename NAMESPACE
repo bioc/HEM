@@ -4,7 +4,7 @@ importFrom(Biobase, addVigs2WinMenu)
 importFrom(grDevices, replayPlot)
 importFrom(stats, as.ts, coef, dendrapply, deviance, end, formula,
            frequency, IQR, is.leaf, knots, median, na.exclude, na.omit,
-           naprint, pf, pnorm, predict, print.anova, printCoefmat, pt,
+           naprint, pf, pnorm, predict, printCoefmat, pt,
            quantile, reformulate, residuals, rnorm, runif,
            smooth.spline, start, symnum, terms, time, ts, tsp, var,
            write.ftable)
